@@ -23,5 +23,5 @@ The landing page serves as the user’s entry point to the system and is primari
 To support correct usage, the page includes brief instructions guiding users through the data upload process. In addition to its core functionality, the landing page provides educational resources, including access to an image acquisition protocol and a link to an online book with background information on the target species.
 
 <p align="center">
-  <img src="images/inicio.jpg" width="1000">
+  <img src="images/inicio.jpg" width="800">
 </p>
