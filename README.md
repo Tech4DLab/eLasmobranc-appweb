@@ -9,5 +9,5 @@ The application follows a client-server architecture. Users interact with a resp
 The backend is implemented in Python using the **Django framework**, which centralizes the application logic and handles request routing, view management and basic security mechanisms. Communication between frontend and backend is performed via HTTP requests through a **REST-style API**.
 
 <p align="center">
-  <img src="images/Example02-LN_046_01.jpg" width="300">
+  <img src="images/flujo.png" width="1000">
 </p>
