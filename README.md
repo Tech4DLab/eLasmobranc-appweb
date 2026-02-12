@@ -23,7 +23,7 @@ The landing page serves as the user’s entry point to the system and is primari
 To support correct usage, the page includes brief instructions guiding users through the data upload process. In addition to its core functionality, the landing page provides educational resources, including access to an image acquisition protocol and a link to an online book with background information on the target species.
 
 <p align="center">
-  <img src="images/inicio.jpg" width="800">
+  <img src="images/inicio.jpg" width="600">
 </p>
 
 ## 📊 Results Page
@@ -31,14 +31,14 @@ To support correct usage, the page includes brief instructions guiding users thr
 The results page is loaded once server-side processing is complete and focuses on interactive visualization of the analysis. A PDF export button is displayed at the top, allowing users to download the full report. First, model outputs are presented as taxonomic distribution charts, enabling comparison across different hierarchical levels.
 
 <p align="center">
-  <img src="images/g_resultados.png" width="800">
+  <img src="images/g_resultados.png" width="600">
 </p>
 
 Next, a temporal analysis per species is provided at both yearly and monthly scales, highlighting observation patterns and facilitating comparison between classes. A geographical analysis follows, showing country-level distributions together with a detailed breakdown across Spanish autonomous communities for localized interpretation.
 
 <p align="center">
-  <img src="images/g_temporal.png" width="800">
-  <img src="images/g_espacial.PNG" width="800">
+  <img src="images/g_temporal.png" width="600">
+  <img src="images/g_espacial.PNG" width="600">
 </p>
 
 Finally, a dedicated section displays individual elasmobranch detections along with model predictions and associated metadata. An additional block groups non-elasmobranch images to support manual review.
