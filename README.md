@@ -44,7 +44,7 @@ Next, a temporal analysis per species is provided at both yearly and monthly sca
 Finally, a dedicated section displays individual elasmobranch detections along with model predictions and associated metadata. An additional block groups non-elasmobranch images to support manual review.
 
 <p align="center">
-  <img src="images/g_datos.png" width="800">
-  <img src="images/g_datosN.png" width="800">
+  <img src="images/g_datos.png" width="600">
+  <img src="images/g_datosN.png" width="300">
 </p>
 
