@@ -2,7 +2,7 @@
 
 This application represents the integration and culmination of multiple prior tasks within the eLasmobranc project, including dataset construction and the development of artificial intelligence models. It provides a functional pipeline for the automatic analysis of large image collections, enabling elasmobranch detection, multi-level taxonomic classification and automated statistical reporting.
 
-# 🏗️ System Architecture
+## 🏗️ System Architecture
 
 The application follows a client-server architecture. Users interact with a responsive frontend built with **HTML**, **JavaScript** and **CSS**, structured into two main views: a landing page for data upload and a results page for visualization and analysis.
 
@@ -12,11 +12,11 @@ The backend is implemented in Python using the **Django framework**, which centr
   <img src="images/flujo.png" width="1000">
 </p>
 
-# 🏗️ Application Features
+## 🏗️ Application Features
 
 The web application capabilities is organized into three main components, corresponding to the system’s functional views: the landing page, the results page, and the PDF report.
 
-## 🏠 Landing Page
+### 🏠 Landing Page
 
 The landing page serves as the user’s entry point to the system and is primarily dedicated to data submission for automatic image processing. Its central element is an upload form that allows users to provide a compressed ZIP file containing the images to be analyzed and, optionally, an Excel file with associated metadata.
 
@@ -26,7 +26,7 @@ To support correct usage, the page includes brief instructions guiding users thr
   <img src="images/inicio.PNG" width="900">
 </p>
 
-## 📊 Results Page
+### 📊 Results Page
 
 The results page is loaded once server-side processing is complete and focuses on interactive visualization of the analysis. A PDF export button is displayed at the top, allowing users to download the full report. First, model outputs are presented as taxonomic distribution charts, enabling comparison across different hierarchical levels.
 
@@ -49,12 +49,12 @@ Finally, a dedicated section displays individual elasmobranch detections along w
   <img src="images/g_datosN.png" width="200">
 </p>
 
-## 📄 PDF Report
+### 📄 PDF Report
 
 The PDF report summarizes the analysis results, reproducing the main visualizations from the Results Page. Furthemore, provides a static summary of the analysis, including key visualizations, dataset identification, statistical highlights (image count, detected classes, most frequent species, Shannon diversity index, and country distribution) and a final table listing all detected elasmobranchs with their taxonomic labels.
 
 👉 **Example report**: <a href="Sample_PDF.pdf" target="_blank">PDF report</a>
 
-# 🤝 Acknowledgments
+## 🤝 Acknowledgments
 
 This research was funded by the eLasmobranc project, which is developed with the collaboration of the Biodiversity Foundation of the Ministry for Ecological Transition and the Demographic Challenge, through the Pleamar Programme, and is co-financed by the European Union through the European Maritime, Fisheries and Aquaculture Fund.
