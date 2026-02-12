@@ -49,3 +49,8 @@ Finally, a dedicated section displays individual elasmobranch detections along w
   <img src="images/g_datosN.png" width="200">
 </p>
 
+## 📄 PDF Report
+
+The PDF report summarizes the analysis results, reproducing the main visualizations from the Results Page. Furthemore, provides a static summary of the analysis, including key visualizations, dataset identification, statistical highlights (image count, detected classes, most frequent species, Shannon diversity index, and country distribution) and a final table listing all detected elasmobranchs with their taxonomic labels.
+
+👉 **Example report**:[Download sample PDF report](examples/sample_report.pdf)
