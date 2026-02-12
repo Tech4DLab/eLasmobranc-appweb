@@ -54,3 +54,7 @@ Finally, a dedicated section displays individual elasmobranch detections along w
 The PDF report summarizes the analysis results, reproducing the main visualizations from the Results Page. Furthemore, provides a static summary of the analysis, including key visualizations, dataset identification, statistical highlights (image count, detected classes, most frequent species, Shannon diversity index, and country distribution) and a final table listing all detected elasmobranchs with their taxonomic labels.
 
 👉 **Example report**: <a href="Sample_PDF.pdf" target="_blank">PDF report</a>
+
+# 🤝 Acknowledgments
+
+This research was funded by the eLasmobranc project, which is developed with the collaboration of the Biodiversity Foundation of the Ministry for Ecological Transition and the Demographic Challenge, through the Pleamar Programme, and is co-financed by the European Union through the European Maritime, Fisheries and Aquaculture Fund.
