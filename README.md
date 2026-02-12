@@ -25,3 +25,21 @@ To support correct usage, the page includes brief instructions guiding users thr
 <p align="center">
   <img src="images/inicio.jpg" width="800">
 </p>
+
+## 📊 Results Page
+
+The results page is loaded once server-side processing is complete and focuses on interactive visualization of the analysis. A PDF export button is displayed at the top, allowing users to download the full report. First, model outputs are presented as taxonomic distribution charts, enabling comparison across different hierarchical levels.
+
+<p align="center">
+  <img src="images/inicio.jpg" width="800">
+</p>
+
+Next, a temporal analysis per species is provided at both yearly and monthly scales, highlighting observation patterns and facilitating comparison between classes. A geographical analysis follows, showing country-level distributions together with a detailed breakdown across Spanish autonomous communities for localized interpretation.
+
+<p align="center">
+  <img src="images/inicio.jpg" width="800">
+  <img src="images/inicio.jpg" width="800">
+</p>
+
+Finally, a dedicated section displays individual elasmobranch detections along with model predictions and associated metadata. An additional block groups non-elasmobranch images to support manual review.
+
