@@ -31,13 +31,13 @@ To support correct usage, the page includes brief instructions guiding users thr
 The results page is loaded once server-side processing is complete and focuses on interactive visualization of the analysis. A PDF export button is displayed at the top, allowing users to download the full report. First, model outputs are presented as taxonomic distribution charts, enabling comparison across different hierarchical levels.
 
 <p align="center">
-  <img src="images/g_resultados.png" width="600">
+  <img src="images/g_resultados.PNG" width="700">
 </p>
 
 Next, a temporal analysis per species is provided at both yearly and monthly scales, highlighting observation patterns and facilitating comparison between classes. A geographical analysis follows, showing country-level distributions together with a detailed breakdown across Spanish autonomous communities for localized interpretation.
 
 <p align="center">
-  <img src="images/g_temporal.png" width="600">
+  <img src="images/g_temporal.PNG" width="600">
   <img src="images/g_espacial.PNG" width="600">
 </p>
 
