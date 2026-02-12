@@ -45,6 +45,7 @@ Finally, a dedicated section displays individual elasmobranch detections along w
 
 <p align="center">
   <img src="images/g_datos.png" width="600">
-  <img src="images/g_datosN.png" width="300">
+  <br><\br>
+  <img src="images/g_datosN.png" width="200">
 </p>
 
