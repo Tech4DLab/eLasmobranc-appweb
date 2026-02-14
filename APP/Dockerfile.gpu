@@ -1,0 +1,28 @@
+FROM nvidia/cuda:12.6.3-cudnn-runtime-ubuntu24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_NO_CACHE_DIR=1
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.12 python3.12-venv python3-pip git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python3.12 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cu126
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+RUN python manage.py collectstatic --noinput
+
+ENV PYTHONPATH=/app/mainpage/modelo/CLIP
+RUN python -c "import os, clip; clip.load(os.environ.get('CLIP_MODEL_NAME','ViT-L/14'), 'cpu')"
+
+ENV PYTHONUNBUFFERED=1
+CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:7000", "--workers", "1", "--timeout", "300"]

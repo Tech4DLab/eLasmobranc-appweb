@@ -1,0 +1,100 @@
+<style>
+  .footer {
+    background: linear-gradient(90deg, #3E3E5C 60%, #6D648B 100%);
+    width: 100%;
+    padding: 32px 14vw 29px 14vw;
+    box-sizing: border-box;
+    text-align: center;
+    color: #E1DCE7;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.08);
+    margin-top: 30px;
+    font-size: 1.06rem;
+    border-radius: 16px 16px 0 0;
+  }
+  .footer p {
+    color: #E1DCE7;
+    margin: 13px 0 7px 0;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: .09em;
+  }
+
+  .footer-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      gap: 15px;
+      padding: 20px 0;
+  }
+  .logos-row {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+  }
+  .logo1 {
+      width: auto;        
+      height: 150px;
+      border-radius: 5px;
+  }
+  .logo2 {
+      width: 1000px;        
+      height: auto;
+      border-radius: 5px;
+  }
+  .link-guia {
+    color: #B3E3FF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+    border-radius: 3px;
+    padding: 0 5px;
+  }
+  .link-guia:hover {
+    color: #26264A;
+    background: #B3E3FF;
+    text-decoration: none;
+  }
+
+  .email-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+
+</style>
+
+{% load static %}
+<footer class="footer">
+    <p>
+        Para conocer más acerca de los tiburones y rayas en Murcia, clica 
+        <a class="link-guia" href="https://web.ua.es/es/cimar/documentos/recursos/guia-tiburones-y-rayas-de-la-region-de-murcia.pdf" target="_blank" rel="noopener noreferrer">AQUÍ</a>.
+    </p>
+    <p>
+        Financiación: Esta investigación ha sido financiada por el proyecto eLasmobranc, 
+        que se desarrolla con la colaboración de la Fundación Biodiversidad del Ministerio 
+        para la Transición Ecológica y el Reto Demográfico, a través del Programa Pleamar, 
+        y está cofinanciada por la Unión Europea a través del Fondo Europeo Marítimo, de 
+        Pesca y de Acuicultura.
+    </p>
+
+  <div class="footer-logos">
+      <div class="logos-row">
+          <img src="{% static 'mainpage/images/footer4.png' %}" alt="" class="logo1">
+          <img src="{% static 'mainpage/images/footer5.png' %}" alt="" class="logo1">
+      </div>
+
+      <div class="footer-meta">
+        <p>
+            Contacto: 
+            <a href="mailto:ismael.bevias@ua.es" class="email-link">ismael.bevias@ua.es</a>
+        </p>
+        <p>
+            © Proyecto eLasmobranc. 
+        </p>
+    </div>
+  </div>
+</footer>

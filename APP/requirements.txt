@@ -1,0 +1,16 @@
+Django==6.0.2
+folium==0.20.0
+ftfy==6.3.1
+numpy==2.4.2
+packaging==26.0
+pandas==3.0.0
+Pillow==12.1.1
+playwright==1.57.0
+pycountry==24.6.1
+pytest==9.0.2
+regex==2025.11.3
+reportlab==4.4.7
+setuptools==70.2.0
+tqdm==4.67.1
+gunicorn==25.1.0
+whitenoise==6.11.0

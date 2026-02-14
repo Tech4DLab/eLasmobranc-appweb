@@ -1,0 +1,651 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+
+  {% block head_extra %}
+    <link rel="stylesheet" href="{% static 'mainpage/ver-img-style.css' %}">
+  {% endblock %}
+
+  {% block content %}
+
+    <form action="{% url 'mainpage:generar_pdf' %}"
+      method="post"
+      onsubmit="return onSubmitPdf(event)"
+      class="form-pdf">
+
+  {% csrf_token %}
+
+  <input type="hidden" name="chart_animal" id="chart_animal">
+  <input type="hidden" name="chart_orden" id="chart_orden">
+  <input type="hidden" name="chart_familia" id="chart_familia">
+  <input type="hidden" name="chart_especie" id="chart_especie">
+  <input type="hidden" name="chart_month_species" id="chart_month_species">
+  <input type="hidden" name="chart_years" id="chart_years">
+
+  <p>Descarga un informe con los resultados obtenidos: </p>
+
+  <div class="pdf-submit-row">
+    <button type="submit" class="btn-submit" id="btnPdf">
+      Descargar PDF
+    </button>
+
+    <span class="spinner" id="pdfSpinner" aria-hidden="true"></span>
+    <span class="spinner-text" id="pdfSpinnerText" style="display:none;">Generando…</span>
+  </div>
+</form>
+
+
+    <h1 class="title">Gráficos de resultados</h1>
+    <div class="fila-graficos">
+      <div class="chart-box">
+        <canvas id="myPieChartAnimal"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="myPieChartOrden"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="myPieChartFamilia"></canvas>
+      </div>
+    </div>
+
+    <div class="fila-graficos">
+      <div class="chart-box chart-wide">
+        <canvas id="myChartEspecie"></canvas>
+      </div>
+    </div>
+
+
+{% if chart_month_species and chart_years %}
+    <br></br>
+
+  <div class="fila-graficos">
+    <div class="chart-box-year">
+      <canvas id="myChartYears"></canvas>
+    </div>
+    <div class="chart-box-month">
+      <canvas id="myChartMonthSpecies"></canvas>
+    </div>
+  
+  </div>
+
+{% elif chart_month_species %}
+
+  <div class="fila-graficos">
+    <div class="chart-box">
+      <canvas id="myChartMonthSpecies"></canvas>
+    </div>
+  </div>
+
+{% elif chart_years %}
+
+
+  <div class="fila-graficos">
+    <div class="chart-box">
+      <canvas id="myChartYears"></canvas>
+    </div>
+  </div>
+{% endif %}
+
+{% if mapa_world_url and mapa_ccaa_url %}
+<br></br>
+<h2 class="title">Distribución geográfica</h2>
+<div class="maps-panel">
+  <div class="maps-viewport">
+    <iframe
+      id="mapWorld"
+      class="map-frame"
+      src="{{ mapa_world_url|default:'' }}"
+      loading="lazy"
+      title="Mapa mundial"
+    ></iframe>
+
+    <iframe
+      id="mapSpain"
+      class="map-frame"
+      src="{{ mapa_ccaa_url|default:'' }}"
+      loading="lazy"
+      title="Mapa España (CCAA)"
+    ></iframe>
+  </div>
+
+  <div class="maps-caption" id="mapsCaption">Mundo</div>
+  <button type="button" class="maps-toggle" id="mapsToggle" aria-label="Cambiar mapa">☰</button>
+</div>
+{% endif %}
+
+<br></br>
+<h2 class="title">Imágenes identificadas como Elasmobranquios</h2>
+
+{% if imagenes %}
+  <div class="tres-columnas">
+
+    <ul class="columna-imagenes">
+      {% for img in imagenes %}
+        {% if forloop.counter0|divisibleby:3 %}
+          <li class="item-imagen">
+            <span class="nombre-imagen" onclick="toggleImagen({{ forloop.counter }})">
+              {{ img.nombre }}
+            </span>
+
+            <div id="contenedor-{{ forloop.counter }}" class="contenedor-imagen-info imagen-oculta">
+              <img id="img-{{ forloop.counter }}"
+                   class="imagen-preview"
+                   data-src="{{ img.ruta }}"
+                   alt="{{ img.nombre }}">
+
+              <div class="info-imagen">
+                {% for dato in img.resultados %}
+                  <p>{{ dato }}</p>
+                {% endfor %}
+              </div>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    <ul class="columna-imagenes">
+      {% for img in imagenes %}
+        {% if forloop.counter0|add:"2"|divisibleby:3 %}
+          <li class="item-imagen">
+            <span class="nombre-imagen" onclick="toggleImagen({{ forloop.counter }})">
+              {{ img.nombre }}
+            </span>
+
+            <div id="contenedor-{{ forloop.counter }}" class="contenedor-imagen-info imagen-oculta">
+              <img id="img-{{ forloop.counter }}"
+                   class="imagen-preview"
+                   data-src="{{ img.ruta }}"
+                   alt="{{ img.nombre }}">
+
+              <div class="info-imagen">
+                {% for dato in img.resultados %}
+                  <p>{{ dato }}</p>
+                {% endfor %}
+              </div>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    <ul class="columna-imagenes">
+      {% for img in imagenes %}
+        {% if forloop.counter0|add:"1"|divisibleby:3 %}
+          <li class="item-imagen">
+            <span class="nombre-imagen" onclick="toggleImagen({{ forloop.counter }})">
+              {{ img.nombre }}
+            </span>
+
+            <div id="contenedor-{{ forloop.counter }}" class="contenedor-imagen-info imagen-oculta">
+              <img id="img-{{ forloop.counter }}"
+                   class="imagen-preview"
+                   data-src="{{ img.ruta }}"
+                   alt="{{ img.nombre }}">
+
+              <div class="info-imagen">
+                {% for dato in img.resultados %}
+                  <p>{{ dato }}</p>
+                {% endfor %}
+              </div>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% else %}
+  <p>No hay imágenes cargadas.</p>
+{% endif %}
+
+
+{% if imagenes_no %}
+  <div class="panel-detalle">
+    <h2 class="title">Imágenes identificadas como No Elasmobranquios</h2>
+    <div class="selector-imagen">
+      <select id="selectorImagen" onchange="mostrarDetalleSelect(this.value)">
+        <option value="" selected disabled>— Elige una imagen —</option>
+        {% for img in imagenes_no %}
+          <option value="{{ forloop.counter }}">{{ img.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div id="panelImagen"></div>
+  </div>
+
+  {% for img in imagenes_no %}
+    <template id="tpl-{{ forloop.counter }}">
+      <img class="detalle-img" src="{{ img.ruta }}" alt="{{ img.nombre }}">
+    </template>
+  {% endfor %}
+{% else %}
+  <p>No hay imágenes cargadas.</p>
+{% endif %}
+
+
+  {% endblock %}
+
+  {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script>
+      // Datos para los gráficos
+      const data = {{ chart_data|safe }};
+      const chartMonthSpecies = {{ chart_month_species|default:"null"|safe }};
+      const chartYears = {{ chart_years|default:"null"|safe }};
+      const ctx = document.getElementById('myPieChartAnimal').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: data.animal,
+          datasets: [{
+            data: data.valuesA,
+            backgroundColor: ['#53FCF6','#FC5359', '#4B0082'] 
+          }]
+        },
+        options: {
+          responsive: true,  
+          maintainAspectRatio: false,
+          devicePixelRatio: 2,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Distribución por Animal',
+              font: { size: 18, weight: 'bold' }
+            },
+            datalabels: {
+              color: '#fff',
+              font: { weight: 'bold', size: 15 },
+              formatter: v => v
+            },
+            legend: {
+              position: 'bottom',
+              labels: {
+                boxWidth: 20,
+                padding: 15
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+      
+      const ctx2 = document.getElementById('myPieChartOrden').getContext('2d');
+      const myChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+          labels: data.orden,
+          datasets: [{
+            data: data.valuesO,
+            backgroundColor: ['#53FCA2','#53FCF6','#53ADFC','#FCA253'] 
+          }]
+        },
+        options: {
+          responsive: true,    
+          maintainAspectRatio: false,
+          devicePixelRatio: 2,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Distribución por Orden',
+              font: { size: 18, weight: 'bold' }
+            },
+            datalabels: {
+              color: '#fff',
+              font: { weight: 'bold', size: 15 },
+              formatter: v => v
+            },
+            legend: {
+              position: 'bottom',
+              labels: {
+                boxWidth: 20,
+                padding: 15
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+
+      const ctx3 = document.getElementById('myPieChartFamilia').getContext('2d');
+      const myChart3 = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+          labels: data.familia,
+          datasets: [{
+            data: data.valuesF,
+            backgroundColor: ['#53FCA2','#53FCF6','#53ADFC','#FCA253','#FC53AD'] 
+          }]
+        },
+        options: {
+          responsive: true,   
+          maintainAspectRatio: false, 
+          devicePixelRatio: 2,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Distribución por Familia',
+              font: { size: 18, weight: 'bold' }
+            },
+            datalabels: {
+              color: '#fff',
+              font: { weight: 'bold', size: 15 },
+              formatter: v => v
+            },
+            legend: {
+              position: 'bottom',
+              labels: {
+                boxWidth: 20,
+                padding: 15
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+
+      const ctx4 = document.getElementById('myChartEspecie').getContext('2d');
+      new Chart(ctx4, {
+        type: 'bar',
+        data: {
+          labels: data.especie,
+          datasets: [{
+            label: 'Número de imágenes',
+            data: data.valuesE,
+            backgroundColor: '#53ADFC',
+            categoryPercentage: 0.4,
+            barPercentage: 1.0
+          }]
+        },
+        options: {
+          indexAxis: 'y',  
+          responsive: true,
+          maintainAspectRatio: false,
+          devicePixelRatio: 2,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Distribución por Especie',
+              font: { size: 18, weight: 'bold' }
+            },
+            legend: {
+              display: false
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'right',
+              formatter: v => v,
+              font: { size: 13 }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { precision: 0 },
+              suggestedMax: Math.max(...data.valuesE) + 1
+            },
+            y: {
+              ticks: {
+                autoSkip: false,
+                font: {
+                  style: 'italic'
+                }
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+
+      // -------- Temporalidad: Mes x Especie (barras apiladas) --------
+if (chartMonthSpecies && document.getElementById('myChartMonthSpecies')) {
+  const ctxM = document.getElementById('myChartMonthSpecies').getContext('2d');
+
+  const speciesNames = Object.keys(chartMonthSpecies.series || {});
+  const datasets = speciesNames.map(sp => ({
+    label: sp,
+    data: chartMonthSpecies.series[sp],
+    borderWidth: 1
+  }));
+
+  new Chart(ctxM, {
+    type: 'bar',
+    data: {
+      labels: chartMonthSpecies.labels,
+      datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: 2,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Distribución mensual por especie',
+          font: { size: 18, weight: 'bold' }
+        },
+        legend: {
+          position: 'bottom',
+          labels: { boxWidth: 14, padding: 12 }
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false
+        }
+      },
+      scales: {
+        x: { stacked: true },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+}
+
+// -------- Temporalidad: Conteo por Año (barras) --------
+if (chartYears && document.getElementById('myChartYears')) {
+  const ctxY = document.getElementById('myChartYears').getContext('2d');
+
+  const speciesNamesY = Object.keys(chartYears.series || {});
+  const datasetsY = speciesNamesY.map(sp => ({
+    label: sp,
+    data: chartYears.series[sp],
+    borderWidth: 1
+  }));
+
+  new Chart(ctxY, {
+    type: 'bar',
+    data: {
+      labels: chartYears.labels,
+      datasets: datasetsY
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: 2,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Distribución anual por especie',
+          font: { size: 18, weight: 'bold' }
+        },
+        legend: {
+          position: 'bottom',
+          labels: { boxWidth: 14, padding: 12 }
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false
+        }
+      },
+      scales: {
+        x: { stacked: true },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+}
+
+let permitirBorradoTemp = true;
+
+(function () {
+  const url = "{% url 'mainpage:borrar_temp' %}";
+  let enviado = false;
+
+  function limpiarTemp() {
+    if (!permitirBorradoTemp) return;
+    if (enviado) return;
+    enviado = true;
+
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(url, new Blob([], { type: "application/json" }));
+        return;
+      }
+    } catch (e) {}
+
+    try {
+      fetch(url, { method: "POST", keepalive: true, credentials: "same-origin" });
+    } catch (e) {}
+  }
+
+  window.addEventListener("pagehide", limpiarTemp);
+  window.addEventListener("beforeunload", limpiarTemp);
+})();
+
+      // Función para mostrar/ocultar imagen y cargarla de forma perezosa (no carga hasta que se muestra)
+      function toggleImagen(id) {
+        const cont = document.getElementById("contenedor-" + id);
+        const img = document.getElementById("img-" + id);
+
+        if (cont.style.display === "none" || cont.style.display === "") {
+            img.src = img.dataset.src;  // Lazy load
+            cont.style.display = "flex";
+        } else {
+            cont.style.display = "none";
+        }
+      }
+async function onSubmitPdf(e) {
+  permitirBorradoTemp = false;
+  e.preventDefault();
+
+  const form = e.target;
+  const btn = document.getElementById("btnPdf");
+  const spinner = document.getElementById("pdfSpinner");
+  const spinnerText = document.getElementById("pdfSpinnerText");
+
+  btn.disabled = true;
+  spinner.style.display = "inline-block";
+  spinnerText.style.display = "inline";
+
+  try {
+    enviarGraficos();
+
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      credentials: "same-origin",
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    }
+    );
+
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || "Generate failed");
+
+    // ✅ aquí el PDF YA se generó en el servidor
+    spinner.style.display = "none";
+    spinnerText.style.display = "none";
+    btn.disabled = false;
+
+    // ✅ descarga en un segundo endpoint
+    window.location.href = data.download_url;
+  } catch (err) {
+    console.error(err);
+    spinner.style.display = "none";
+    spinnerText.style.display = "none";
+    btn.disabled = false;
+    alert("No se pudo generar el PDF.");
+  }
+
+  permitirBorradoTemp = true;
+  return false;
+}
+
+
+      // Enviar gráficos como data URLs para el PDF
+      function enviarGraficos() {
+    document.getElementById("chart_animal").value =
+    document.getElementById("myPieChartAnimal").toDataURL("image/png");
+
+    document.getElementById("chart_orden").value =
+      document.getElementById("myPieChartOrden").toDataURL("image/png");
+
+    document.getElementById("chart_familia").value =
+      document.getElementById("myPieChartFamilia").toDataURL("image/png");
+
+    document.getElementById("chart_especie").value =
+      document.getElementById("myChartEspecie").toDataURL("image/png");
+
+    const monthCanvas = document.getElementById("myChartMonthSpecies");
+    const yearCanvas = document.getElementById("myChartYears");
+
+    document.getElementById("chart_month_species").value =
+      monthCanvas ? monthCanvas.toDataURL("image/png") : "";
+
+    document.getElementById("chart_years").value =
+      yearCanvas ? yearCanvas.toDataURL("image/png") : "";
+  }
+
+
+function mostrarDetalleSelect(valor){
+  const panel = document.getElementById("panelImagen");
+  panel.innerHTML = "";
+  if (!valor) return;
+  const tpl = document.getElementById(`tpl-${valor}`);
+  if (!tpl) return;
+  panel.appendChild(tpl.content.cloneNode(true));
+}
+
+(function () {
+  const world = document.getElementById("mapWorld");
+  const spain = document.getElementById("mapSpain");
+  const btn = document.getElementById("mapsToggle");
+  const caption = document.getElementById("mapsCaption");
+
+  const hasWorld = world && world.getAttribute("src") && world.getAttribute("src").trim() !== "";
+  const hasSpain = spain && spain.getAttribute("src") && spain.getAttribute("src").trim() !== "";
+
+  function setActive(which) {
+    if (world) world.classList.remove("is-active");
+    if (spain) spain.classList.remove("is-active");
+
+    if (which === "spain") {
+      if (spain) spain.classList.add("is-active");
+      if (caption) caption.textContent = "España";
+    } else {
+      if (world) world.classList.add("is-active");
+      if (caption) caption.textContent = "Mundo";
+    }
+  }
+
+  if (!hasWorld && hasSpain) setActive("spain");
+  else setActive("world");
+
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const worldActive = world && world.classList.contains("is-active");
+      if (worldActive) setActive("spain");
+      else setActive("world");
+    });
+  }
+})();
+
+
+    </script>
+  {% endblock %}

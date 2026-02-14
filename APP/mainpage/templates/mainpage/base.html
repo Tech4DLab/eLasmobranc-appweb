@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}eLasmobranc{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mainpage/base-style.css' %}">
+
+    {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+
+    {% include "mainpage/header.html" %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% include "mainpage/footer.html" %}
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,192 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+
+  {% block head_extra %}
+    <link rel="stylesheet" href="{% static 'mainpage/main-style.css' %}">
+  {% endblock %}
+
+  {% block content %}
+    <div id="modalPDF">
+      <div class="modal-content-PDF">
+        <button onclick="closePDFModal()"> X </button>
+        <iframe src="/media/folleto-protocolo.pdf" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="title-container">
+      <h2 class="title">Subir un archivo ZIP con imágenes</h2>
+      <a href="#" id="link-proto" onclick="openPDFModal(event)">Ver protocolo de adquisición</a>
+    </div>
+
+    <div class="contenedor">
+      <div class="contenedor-item">
+        <h3>Introduce archivos:</h3>
+        <form method="post" enctype="multipart/form-data" id="mainForm">
+          {% csrf_token %}
+          <label class="btn-file">
+            ZIP
+            <input type="file" name="zipfile" accept=".zip" required>
+            <span class="file-name">Ningún archivo seleccionado</span>
+          </label>
+          <br> <br>
+          <label class="btn-file">
+            Excel (Opcional)
+            <input type="file" name="excelfile" accept=".xlsx,.xls,.csv">
+            <span class="file-name">Ningún archivo seleccionado</span>
+          </label>
+
+          <br> <br>
+          <button type="submit" class="btn-submit">Subir archivos</button>
+
+          <div id="loader-container">
+              <div class="spinner"></div>
+              <div class="loader-text">Procesando archivos...</div>
+          </div>
+
+          {% if error %}
+            <p class="error" id="mensajeError">{{ error }}</p>
+          {% endif %}
+        </form>
+      </div>
+
+
+        <div class="contenedor-item">
+        <h3>Instrucciones:</h3>
+       <ul class="contenedor-text">
+        <li>
+          <strong>Seleccione un archivo ZIP</strong> que contenga todas las imágenes a procesar.
+          Se aceptan los siguientes formatos: .png, .jpg, .jpeg, .gif, .bmp y .webp.
+        </li>
+        <li>
+          <strong>De forma opcional</strong>, puede subir un archivo <strong>Excel</strong> (<strong>.xlsx, .xls o .csv</strong>)
+          con información adicional asociada a las imágenes. Estos datos (país, región y fecha) se incluirán automáticamente
+          en los resultados.
+        </li>
+        <li>
+          Para que el sistema reconozca correctamente la información del archivo Excel:
+          <ul>
+            <li>Debe existir una columna llamada <strong>ID</strong>, que contenga el <strong>nombre completo de la imagen</strong>, extensión no incluida.</li>
+            <li>Las columnas adicionales deben llamarse <strong>country</strong>, <strong>area</strong> y <strong>observed_on</strong>.</li>
+            <li><strong>Formato obligatorio de los datos</strong>: la fecha debe indicarse en formato <strong>YYYY-MM-DD</strong>, y los campos <strong>country</strong> y <strong>area</strong> deben escribirse <strong>en inglés</strong>.</li>  
+            <li>
+              Para los registros de <strong>España</strong>, se proporciona una
+              <a href="#" onclick="openRegionsModal(event)">
+                <strong>lista de referencia</strong>  
+              </a>
+              con el formato correcto de las áreas.
+            </li>
+
+            <div id="regionsModal" class="modal">
+              <div class="modal-content">
+                <h3>Formato de areas de España</h3>
+                <ul>
+                <li>Valencian Community</li>
+                <li>Galicia</li>
+                <li>Andalusia</li>
+                <li>Canary Islands</li>
+                <li>Region of Murcia</li>
+                <li>Catalonia</li>
+                <li>Cantabria</li>
+                <li>Balearic Islands</li>
+                <li>Community of Madrid</li>
+                <li>Asturias</li>
+                <li>Autonomous Community of the Basque Country</li>
+              </ul>
+                <button onclick="closeRegionsModal()">Close</button>
+              </div>
+            </div>
+
+          </ul>
+        </li>
+        <li>
+          Haga clic en <strong>“Subir archivos”</strong> para iniciar el procesamiento de los archivos seleccionados.
+        </li>
+      </ul>
+      </div>
+    </div>
+
+    
+
+    <h2 class="title-especies">Especies que podemos identificar:</h2>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/cerdo5-v2.png' %}" alt="">
+          <h2><i>Oxynotus centrina</i> (cerdo marino)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/czon1-v2.png' %}" alt="">
+          <h2><i>Galeorhinus galeus</i> (cazon)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/esq_boca4-v2.png' %}" alt="">
+          <h2><i>Galeus melastomus</i> (bocanegra)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/mus4-v2.png' %}" alt="">
+          <h2><i>Mustelus mustelus</i> (musola)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/pint7-v2.png' %}" alt="">
+          <h2><i>Scyliorhinus canicula</i> (pintarroja)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/sant2-v2.png' %}" alt="">
+          <h2><i>Leucoraja naveus</i> (santiaguesa)</h2>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'mainpage/images/tem3-v2.png' %}" alt="">
+          <h2><i>Torpedo marmorata</i> (tembladera)</h2>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+  {% endblock %}
+
+  {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      // Inicializar el carrusel Swiper
+      new Swiper('.swiper', {
+        loop: true,
+        autoplay: { delay: 3000 },
+        pagination: { el: '.swiper-pagination' },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      });
+
+      document.querySelectorAll('.btn-file input[type="file"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+          var fileName = this.files.length > 0 ? this.files[0].name : 'Ningún archivo seleccionado';
+          this.parentNode.querySelector('.file-name').textContent = fileName;
+        });
+      });
+
+      function openPDFModal(event) {
+        event.preventDefault();
+        document.getElementById('modalPDF').style.display = 'flex';
+      }
+
+      function closePDFModal() {
+        document.getElementById('modalPDF').style.display = 'none';
+      }
+
+      function openRegionsModal(event) {
+        event.preventDefault();
+        document.getElementById('regionsModal').style.display = 'flex';
+      }
+
+      function closeRegionsModal() {
+        document.getElementById('regionsModal').style.display = 'none';
+      }
+
+      const form = document.getElementById('mainForm');
+      const loader = document.getElementById('loader-container');
+      form.addEventListener('submit', function() {
+        loader.classList.add('active');
+      });
+    </script>
+  {% endblock %}

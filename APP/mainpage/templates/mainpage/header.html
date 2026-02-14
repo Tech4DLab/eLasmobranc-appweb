@@ -1,0 +1,65 @@
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+.header {
+    background: linear-gradient(90deg, #26264A 60%, #474793 100%);
+    width: 100%;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 12px rgba(60,60,90,0.09);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 80%; /* Limitar ancho para dejar espacio al botón */
+}
+
+.title-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Permite que el título y logo se ajusten si es necesario */
+}
+
+.logo1 {
+    width: auto;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.logo2 {
+    width: 95%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+}
+
+</style>
+
+{% load static %}
+<header class="header">
+  <nav class="nav header">
+    <div class="header-left">
+      <div class="title-logo">
+        <a href="{% url 'mainpage:main_page' %}">
+          <img src="{% static 'mainpage/images/footer4.png' %}" alt="" class="logo1">
+          <img src="{% static 'mainpage/images/footer5.png' %}" alt="" class="logo1">
+        </a>
+      </div>
+      <div class="logo-bottom">
+        <img src="{% static 'mainpage/images/footer6.2.png' %}" alt="" class="logo2">
+      </div>
+    </div>
+  </nav>
+</header>
