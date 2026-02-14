@@ -20,7 +20,7 @@ You only need: *Docker Desktop* (Windows / macOS) or *Docker Engine* (Linux).
 ```bash
 docker --version                         # verify Docker is installed
 docker pull ibevias/elasmobranc:appcpu  # download the application
-docker run --rm -p 7000:8000 ibevias/elasmobranc:appcpu  # run the application (change 8000 if busy)
+docker run --rm -p 8000:7000 ibevias/elasmobranc:appcpu  # run the application (change 8000 if busy)
 ```
 
 **Open in Your Browser**
