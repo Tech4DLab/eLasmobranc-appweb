@@ -6,25 +6,38 @@ This application represents the integration and culmination of multiple prior ta
 
 <p>
   <a href="https://drive.google.com/file/d/1s8yThPNy3RuZXzSMmp-3fmvVOnlRm_hC/view?usp=sharing">
-    <img src="https://img.shields.io/badge/🧩 Example Dataset-007BFF?style=for-the-badge&logoColor=white" />
+    <img src="https://img.shields.io/badge/🧩 Example Dataset-F54927?style=for-the-badge&logoColor=white" />
   </a>
 </p>
-https://drive.google.com/file/d/1s8yThPNy3RuZXzSMmp-3fmvVOnlRm_hC/view?usp=sharing
 
-This application is distributed as a ready-to-use Docker image. You do **not** need to install Python or any dependencies locally.
+This application is distributed as ready-to-use Docker images. You do **not** need to install Python or any dependencies locally.
 
-**Requirements**
-You only need: *Docker Desktop* (Windows / macOS) or *Docker Engine* (Linux).
+We provide both CPU and GPU implementations: the CPU version ensures broad compatibility across systems, while the GPU version enables faster inference for analyses but requires an NVIDIA GPU with proper driver.
 
-**Run the Application**
+## ✅ Requirements
+
+You only need:
+- **Docker Desktop** (Windows / macOS) or **Docker Engine** (Linux)
 ```bash
-docker --version                         # verify Docker is installed
-docker pull ibevias/elasmobranc:appcpu  # download the application
-docker run --rm -p 8000:7000 ibevias/elasmobranc:appcpu  # run the application (change 8000 if busy)
+docker --version # verify Docker is installed
+```
+
+**🖥️ Run on CPU**
+
+```bash
+docker pull ibevias/elasmobranc:appcpu  # download CPU image
+docker run --rm -p 8000:7000 ibevias/elasmobranc:appcpu
+```
+
+**🖥️ Run on GPU**
+
+```bash
+docker pull ibevias/elasmobranc:appgpu  # download GPU image
+docker run --rm --gpus all -p 8000:7000 ibevias/elasmobranc:appgpu
 ```
 
 **Open in Your Browser**
-http://localhost:8000   # use a different port if 8000 is busy
+http://localhost:8000   # use a different port if 8000 is busy modifying the first port number in the `docker run` command.
 
 **Stop the Application**
 In the terminal where it is running, press: 
