@@ -26,23 +26,22 @@ docker --version # verify Docker is installed
 
 ```bash
 docker pull ibevias/elasmobranc:appcpu  # download CPU image
-docker run --rm -p 8000:7000 ibevias/elasmobranc:appcpu
+docker run -d -p 8000:7000 --name elasmobranc_app ibevias/elasmobranc:appcpu
 ```
 
 **🖥️ Run on GPU**
 
 ```bash
 docker pull ibevias/elasmobranc:appgpu  # download GPU image
-docker run --rm --gpus all -p 8000:7000 ibevias/elasmobranc:appgpu
+docker run -d --gpus all -p 8000:7000 --name elasmobranc_app ibevias/elasmobranc:appgpu
 ```
 
 **Open in Your Browser**
 http://localhost:8000   # use a different port if 8000 is busy modifying the first port number in the `docker run` command.
 
-**Stop the Application**
-In the terminal where it is running, press: 
+**Stop the Application** 
 ```bash
-CTRL + C # 
+docker stop elasmobranc_app
 ```
 
 ## 🏗️ System Architecture
