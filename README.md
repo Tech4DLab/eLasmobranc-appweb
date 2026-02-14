@@ -2,6 +2,33 @@
 
 This application represents the integration and culmination of multiple prior tasks within the eLasmobranc project, including dataset construction and the development of artificial intelligence models. It provides a functional pipeline for the automatic analysis of large image collections, enabling elasmobranch detection, multi-level taxonomic classification and automated statistical reporting.
 
+## 🏗️ 🐳 How to Run the Application
+
+This application is distributed as a ready-to-use Docker image.  
+You do **not** need to install Python or any dependencies locally.
+
+**Requirements**
+
+You only need: *Docker Desktop* (Windows / macOS) or *Docker Engine* (Linux).
+
+**Run the Application**
+
+```bash
+docker --version                         # verify Docker is installed
+docker pull ibevias/elasmobranc:appcpu  # download the application
+docker run --rm -p 8000:7000 ibevias/elasmobranc:appcpu  # run the application (change 8000 if busy)
+```
+
+**Open in Your Browser**
+http://localhost:8000   # use a different port if 8000 is busy
+
+**Stop the Application**
+In the terminal where it is running, press: 
+
+```bash
+CTRL + C # 
+```
+
 ## 🏗️ System Architecture
 
 The application follows a client-server architecture. Users interact with a responsive frontend built with **HTML**, **JavaScript** and **CSS**, structured into two main views: a landing page for data upload and a results page for visualization and analysis.
