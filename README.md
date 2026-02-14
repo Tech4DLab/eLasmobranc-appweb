@@ -4,6 +4,11 @@ This application represents the integration and culmination of multiple prior ta
 
 ## 🏗️ 🐳 How to Run the Application
 
+<p>
+  <a href="https://drive.google.com/file/d/1s8yThPNy3RuZXzSMmp-3fmvVOnlRm_hC/view?usp=sharing">
+    <img src="https://img.shields.io/badge/🧩 Example Dataset-007BFF?style=for-the-badge&logoColor=white" />
+  </a>
+</p>
 https://drive.google.com/file/d/1s8yThPNy3RuZXzSMmp-3fmvVOnlRm_hC/view?usp=sharing
 
 This application is distributed as a ready-to-use Docker image. You do **not** need to install Python or any dependencies locally.
