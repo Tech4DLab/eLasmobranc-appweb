@@ -14,7 +14,7 @@ This application is distributed as ready-to-use Docker images. You do **not** ne
 
 We provide both CPU and GPU implementations: the CPU version ensures broad compatibility across systems, while the GPU version enables faster inference for analyses but requires an NVIDIA GPU with proper driver.
 
-## ✅ Requirements
+**✅ Requirements**
 
 You only need:
 - **Docker Desktop** (Windows / macOS) or **Docker Engine** (Linux)
