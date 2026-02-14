@@ -4,15 +4,12 @@ This application represents the integration and culmination of multiple prior ta
 
 ## 🏗️ 🐳 How to Run the Application
 
-This application is distributed as a ready-to-use Docker image.  
-You do **not** need to install Python or any dependencies locally.
+This application is distributed as a ready-to-use Docker image. You do **not** need to install Python or any dependencies locally.
 
 **Requirements**
-
 You only need: *Docker Desktop* (Windows / macOS) or *Docker Engine* (Linux).
 
 **Run the Application**
-
 ```bash
 docker --version                         # verify Docker is installed
 docker pull ibevias/elasmobranc:appcpu  # download the application
@@ -24,7 +21,6 @@ http://localhost:8000   # use a different port if 8000 is busy
 
 **Stop the Application**
 In the terminal where it is running, press: 
-
 ```bash
 CTRL + C # 
 ```
