@@ -6,7 +6,7 @@ This application represents the integration and culmination of multiple prior ta
 
 <p>
   <a href="https://drive.google.com/file/d/1s8yThPNy3RuZXzSMmp-3fmvVOnlRm_hC/view?usp=sharing">
-    <img src="https://img.shields.io/badge/🧩 Example Dataset-6F27F5?style=for-the-badge&logoColor=white" />
+    <img src="https://img.shields.io/badge/🧩 Example Dataset-cc6600?style=for-the-badge&logoColor=white" />
   </a>
 </p>
 
