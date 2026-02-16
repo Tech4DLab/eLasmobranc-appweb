@@ -2,6 +2,8 @@
 
 This application represents the integration and culmination of multiple prior tasks within the eLasmobranc project, including dataset construction and the development of artificial intelligence models. It provides a functional pipeline for the automatic analysis of large image collections, enabling elasmobranch detection, multi-level taxonomic classification and automated statistical reporting.
 
+You can watch the [video demonstration here](https://drive.google.com/file/d/1GMDdDeg_PeypzRlrc5bjVICbvN0bkrm-/view?usp=sharing), providing a walkthrough of all the system’s functionalities.
+ 
 ## 🏗️ 🐳 How to Run the Application
 
 <p>
